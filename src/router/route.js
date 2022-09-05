@@ -5,7 +5,7 @@ const {
   principal,
 } = require("../Controller/sendUniversities");
 
-const saveArgentina = require("../model/Universities/Repository");
+const save = require("../model/Universities/Repository");
 
 //Cors
 router.use(cors());
@@ -13,7 +13,7 @@ router.options("*", cors());
 
 //Main
 
-router.get("/", saveArgentina);
+router.get("/", save);
 // router.get("/", principal);
 
 module.exports = router;

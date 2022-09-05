@@ -12,12 +12,12 @@ datasource db {
 
 model argentina {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  domains        String[]
-  alpha_two_code String
-  country        String
-  web_pages      String[]
-  name           String
-  stateprovince  String?
+  domains        String[] @unique
+  alpha_two_code String   @unique
+  country        String   @unique
+  web_pages      String[] @unique
+  name           String   @unique
+  state_province String?  @unique
 }
 
 model brasil {
@@ -27,13 +27,14 @@ model brasil {
   country        String
   web_pages      String[]
   name           String
-  stateprovince  String?
+  state_province String?
 }
 
 model chile {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   domains        String[]
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?
@@ -43,6 +44,7 @@ model colombia {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   domains        String[]
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?
@@ -50,8 +52,9 @@ model colombia {
 
 model paraguai {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  domains        String[]
+  domains        String[] @unique
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?
@@ -61,6 +64,7 @@ model peru {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   domains        String[]
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?
@@ -70,6 +74,7 @@ model suriname {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   domains        String[]
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?
@@ -79,6 +84,7 @@ model uruguay {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   domains        String[]
   alpha_two_code String
+  country        String
   web_pages      String[]
   name           String
   state_province String?

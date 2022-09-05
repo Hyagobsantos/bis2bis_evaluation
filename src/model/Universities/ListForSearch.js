@@ -9,4 +9,14 @@ const university = {
   uruguay: "uruguay",
 };
 
+// const university = [
+//   "argentina",
+//   "brazil",
+//   "chile",
+//   "colombia",
+//   "paraguai",
+//   "peru",
+//   "suriname",
+//   "uruguay",
+// ];
 module.exports = university;
