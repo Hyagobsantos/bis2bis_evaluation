@@ -70,8 +70,9 @@ const getUniversitiesById = async (req, res) => {
 
   const universities = await searchUniversity("", id);
 
-  if (!universities) {
+  if (!universities || universities.length === 0) {
     res.status(400).json({ erro: "error when searching" });
+    return;
   }
 
   res.status(200).json(universities);

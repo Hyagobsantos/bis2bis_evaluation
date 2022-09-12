@@ -6,6 +6,7 @@ const {
   checkFields,
 } = require("../Controller/helper/checkFields");
 
+
 const createUniversities = async (req, res) => {
   const inf = req.body;
 

@@ -90,4 +90,17 @@ function checkFields(data) {
   }
 }
 
-module.exports = { checkTypeField, checkFields };
+function checkFieldsUpdate(data) {
+  if (typeof data.domains != "object") {
+    return "domains field must be informed and be a array";
+  }
+
+  if (typeof data.web_pages != "object") {
+    return "web_pages field must be informed and be a array";
+  }
+  if (typeof data.name != "string") {
+    return "name field must be informed and be a text";
+  }
+}
+
+module.exports = { checkTypeField, checkFields, checkFieldsUpdate };
