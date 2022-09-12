@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const searchUniversity = require("../Controller/helper/searchUniversity");
+const countries = require("../Controller/helper/countries");
 
 const getUniversities = async (req, res) => {
   const county = req.query;
@@ -9,17 +11,6 @@ const getUniversities = async (req, res) => {
   if (!page) {
     page = 0;
   }
-
-  const countries = [
-    prisma.argentina,
-    prisma.brasil,
-    prisma.chile,
-    prisma.colombia,
-    prisma.paraguai,
-    prisma.peru,
-    prisma.suriname,
-    prisma.uruguay,
-  ];
 
   if (county.country) {
     const filter =
@@ -53,6 +44,8 @@ const getUniversities = async (req, res) => {
   } else {
     const allUniversities = countries.map(async (x, y) => {
       return await x.findMany({
+        skip: 20 * page,
+        take: 20,
         select: {
           id: true,
           name: true,
@@ -68,9 +61,21 @@ const getUniversities = async (req, res) => {
         universities.push([...uni]);
       });
     }
-
     res.status(200).json(universities);
   }
 };
 
-module.exports = { getUniversities };
+const getUniversitiesById = async (req, res) => {
+  const id = req.params.id;
+
+  const universities = await searchUniversity("", id);
+
+  if (!universities || universities.length === 0) {
+    res.status(400).json({ erro: "error when searching" });
+    return;
+  }
+
+  res.status(200).json(universities);
+};
+
+module.exports = { getUniversities, getUniversitiesById };

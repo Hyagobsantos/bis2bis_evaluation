@@ -116,39 +116,29 @@ async function saveUruguay() {
   console.log("Finalizado Save Uruguay");
 }
 
-async function save(req, res) {
-  const pupulad = await prisma.is_populad.findUnique({
+async function save() {
+  await prisma.is_populad.create({
+    data: {
+      id: process.env.DB_FLAG_IS_POPULAD,
+      populated: false,
+    },
+  });
+  saveArgentina();
+  saveBrasil();
+  saveColombia();
+  saveChile();
+  saveParaguai();
+  savePeru();
+  saveSuriname();
+  saveUruguay();
+  await prisma.is_populad.update({
     where: {
       id: process.env.DB_FLAG_IS_POPULAD,
     },
-    select: {
+    data: {
       populated: true,
     },
   });
-  if (pupulad === null) {
-    await prisma.is_populad.create({
-      data: {
-        id: process.env.DB_FLAG_IS_POPULAD,
-        populated: false,
-      },
-    });
-    saveArgentina();
-    saveBrasil();
-    saveColombia();
-    saveChile();
-    saveParaguai();
-    savePeru();
-    saveSuriname();
-    saveUruguay();
-    await prisma.is_populad.update({
-      where: {
-        id: process.env.DB_FLAG_IS_POPULAD,
-      },
-      data: {
-        populated: true,
-      },
-    });
-  }
 }
 
 module.exports = { save };
