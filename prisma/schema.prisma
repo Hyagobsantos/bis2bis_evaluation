@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -88,4 +89,9 @@ model uruguay {
   web_pages      String[]
   name           String
   state_province String?
+}
+
+model is_populad {
+  id        String  @id @map("_id")
+  populated Boolean @unique
 }

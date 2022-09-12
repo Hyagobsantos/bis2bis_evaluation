@@ -2,174 +2,153 @@ const Api = require("../../Api/api");
 const university = require("./ListForSearch");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+require("dotenv").config();
+
+function saveUniversities(university) {
+  let total = [];
+  university.map((uni) => {
+    total.push({
+      domains: uni.domains,
+      alpha_two_code: uni.alpha_two_code,
+      country: uni.country,
+      web_pages: uni.web_pages,
+      name: uni.name,
+      state_province: Object.values(uni)[5],
+    });
+  });
+
+  return total;
+}
 
 async function saveArgentina() {
   const arg = await Api.getUniversity(university.argentina);
-  await Promise.all(
-    arg.map(async (user) => {
-      await prisma.argentina.create({
-        data: {
-          domains: user.domains,
-          alpha_two_code: user.alpha_two_code,
-          country: user.country,
-          web_pages: user.web_pages,
-          name: user.name,
-          state_province: Object.values(user)[5],
-        },
-      });
-    })
-  );
+
+  if (arg.length !== 0) {
+    await prisma.argentina.createMany({
+      data: saveUniversities(arg),
+    });
+  }
+
   console.log("Finalizado Save Argentina");
 }
 
 async function saveBrasil() {
   const bra = await Api.getUniversity(university.brasil);
-  await Promise.all(
-    bra.map(async (country) => {
-      await prisma.brasil.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (bra.length !== 0) {
+    await prisma.brasil.createMany({
+      data: saveUniversities(bra),
+    });
+  }
+
   console.log("Finalizado Save Brasil");
 }
 
 async function saveColombia() {
   const col = await Api.getUniversity(university.colombia);
-  await Promise.all(
-    col.map(async (country) => {
-      await prisma.colombia.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (col.length !== 0) {
+    await prisma.colombia.createMany({
+      data: saveUniversities(col),
+    });
+  }
+
   console.log("Finalizado Save Colombia");
 }
 
 async function saveChile() {
   const chi = await Api.getUniversity(university.chile);
-  await Promise.all(
-    chi.map(async (country) => {
-      await prisma.chile.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (chi.length !== 0) {
+    await prisma.chile.createMany({
+      data: saveUniversities(chi),
+    });
+  }
+
   console.log("Finalizado Save Chile");
 }
 
 async function saveParaguai() {
   const par = await Api.getUniversity(university.paraguai);
-  await Promise.all(
-    par.map(async (country) => {
-      await prisma.paraguai.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (par.length !== 0) {
+    await prisma.paraguai.createMany({
+      data: saveUniversities(par),
+    });
+  }
+
   console.log("Finalizado Save Paraguai");
 }
 
 async function savePeru() {
   const per = await Api.getUniversity(university.peru);
-  await Promise.all(
-    per.map(async (country) => {
-      await prisma.peru.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (per.length !== 0) {
+  }
+  await prisma.peru.createMany({
+    data: saveUniversities(per),
+  });
+
   console.log("Finalizado Save Peru");
 }
 
 async function saveSuriname() {
   const sur = await Api.getUniversity(university.suriname);
-  await Promise.all(
-    sur.map(async (country) => {
-      await prisma.suriname.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (sur.length !== 0) {
+    await prisma.suriname.createMany({
+      data: saveUniversities(sur),
+    });
+  }
+
   console.log("Finalizado Save Suriname");
 }
 
 async function saveUruguay() {
   const uru = await Api.getUniversity(university.uruguay);
-  await Promise.all(
-    uru.map(async (country) => {
-      await prisma.uruguay.create({
-        data: {
-          domains: country.domains,
-          alpha_two_code: country.alpha_two_code,
-          country: country.country,
-          web_pages: country.web_pages,
-          name: country.name,
-          state_province: Object.values(country)[5],
-        },
-      });
-    })
-  );
+
+  if (uru.length !== 0) {
+    await prisma.uruguay.createMany({
+      data: saveUniversities(uru),
+    });
+  }
+
   console.log("Finalizado Save Uruguay");
 }
 
 async function save(req, res) {
-  try {
-    await prisma.$connect();
+  const pupulad = await prisma.is_populad.findUnique({
+    where: {
+      id: process.env.DB_FLAG_IS_POPULAD,
+    },
+    select: {
+      populated: true,
+    },
+  });
+  if (pupulad === null) {
+    await prisma.is_populad.create({
+      data: {
+        id: process.env.DB_FLAG_IS_POPULAD,
+        populated: false,
+      },
+    });
     saveArgentina();
-    // saveBrasil();
-    // saveColombia();
-    // saveChile();
-    // saveParaguai();
-    // savePeru();
-    // saveSuriname();
-    // saveUruguay();
-    await prisma.$disconnect();
-  } catch (err) {
-    res.status(400).json({ err: "Salvo com sucesso" });
+    saveBrasil();
+    saveColombia();
+    saveChile();
+    saveParaguai();
+    savePeru();
+    saveSuriname();
+    saveUruguay();
+    await prisma.is_populad.update({
+      where: {
+        id: process.env.DB_FLAG_IS_POPULAD,
+      },
+      data: {
+        populated: true,
+      },
+    });
   }
 }
 
-module.exports = save;
+module.exports = { save };
