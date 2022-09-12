@@ -2,11 +2,11 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/languages/count/Hyagobsantos/bis2bis_evaluation?label=Linguagens" />
-    <img src="https://img.shields.io/github/languages/top/Hyagobsantos/bis2bis_evaluation-Nodejs?style=flat-square&logo=javascript">
-    <img src="https://img.shields.io/github/stars/Hyagobsantos/bis2bis_evaluation-Nodejs?label=Estrelas" />
-    <img src="https://img.shields.io/tokei/lines/github/Hyagobsantos/bis2bis_evaluation-Nodejs">
-    <img src="https://img.shields.io/snyk/vulnerabilities/github/Hyagobsantos/bis2bis_evaluation-Nodejs?color=green&label=Vulnerabilidades" />
-    <img src="https://img.shields.io/github/license/Hyagobsantos/bis2bis_evaluation-Nodejs?color=green&style=flat-square" />
+    <img src="https://img.shields.io/github/languages/top/Hyagobsantos/bis2bis_evaluation?style=flat-square&logo=javascript">
+    <img src="https://img.shields.io/github/stars/Hyagobsantos/bis2bis_evaluation?label=Estrelas" />
+    <img src="https://img.shields.io/tokei/lines/github/Hyagobsantos/bis2bis_evaluation">
+    <img src="https://img.shields.io/snyk/vulnerabilities/github/Hyagobsantos/bis2bis_evaluation?color=green&label=Vulnerabilidades" />
+    <img src="https://img.shields.io/github/license/Hyagobsantos/bis2bis_evaluation?color=green&style=flat-square" />
 </p>
 
 ## Sobre essa API
